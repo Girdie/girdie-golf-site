@@ -1,3 +1,10 @@
-# Internal only — contains unpublished financials (entry-fee revenue, charity
-# reconciliation, per-course economics). Must never reach the public repo.
+# Internal only — must never reach the public repo.
+#
+# NOTES.md            unpublished financials (entry-fee revenue, charity reconciliation,
+#                     per-course economics)
+# DNS-MIGRATION.md    documents current email-auth weaknesses; publishing it is an
+#                     invitation to spoof info@girdie-golf.com
+# *.zone              full DNS zone including mail routing
 NOTES.md
+DNS-MIGRATION.md
+*.zone
