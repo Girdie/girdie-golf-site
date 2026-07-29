@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Girdie Golf — Turn one par-3 into pro shop revenue</title>
+<meta name="description" content="Girdie Golf runs a hit-the-green challenge on your course. We bring the staff, the tech and the prize money — including the $1,000 hole-in-one. In 2026 our 11 partner courses sold $112,360 in pro shop gift cards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B0A1F;
+  --navy-2:#131130;
+  --navy-3:#1C1943;
+  --lime:#C6DB4C;
+  --lime-dim:#A8BC38;
+  --cyan:#00A6C0;
+  --cream:#F6F4EC;
+  --ink:#0B0A1F;
+  --text:#E9E8F2;
+  --muted:#9C99B8;
+  --line:rgba(255,255,255,.11);
+  --head:'Barlow Condensed',Impact,sans-serif;
+  --body:'Poppins',system-ui,sans-serif;
+  --wrap:1200px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+section[id]{scroll-margin-top:90px}
+body{
+  margin:0;background:var(--navy);color:var(--text);
+  font-family:var(--body);font-weight:300;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+
+/* ---------- type ---------- */
+h1,h2,h3,.stat-n{font-family:var(--head);font-weight:700;line-height:1.02;text-transform:uppercase;letter-spacing:-.01em;margin:0}
+h1{font-size:clamp(2.6rem,6.2vw,4.6rem)}
+h2{font-size:clamp(2rem,4.4vw,3.2rem)}
+h3{font-size:1.3rem;letter-spacing:.01em}
+.eyebrow{
+  font-family:var(--head);font-weight:600;text-transform:uppercase;
+  letter-spacing:.18em;font-size:.82rem;color:var(--lime);margin:0 0 18px
+}
+.lead{font-size:1.12rem;color:#C9C7DC;max-width:60ch}
+.sect{padding:clamp(72px,9vw,128px) 0;border-top:1px solid var(--line)}
+.sect-head{max-width:70ch;margin-bottom:56px}
+.sect-head h2{margin-bottom:18px}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--head);font-weight:600;text-transform:uppercase;letter-spacing:.09em;
+  font-size:1.02rem;padding:15px 30px;border-radius:2px;text-decoration:none;
+  border:2px solid transparent;transition:.16s ease;cursor:pointer;
+}
+.btn-1{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+.btn-1:hover{background:#D7E96A;border-color:#D7E96A}
+.btn-2{background:transparent;color:var(--text);border-color:rgba(255,255,255,.28)}
+.btn-2:hover{border-color:var(--lime);color:var(--lime)}
+.btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+
+/* ---------- nav ---------- */
+header{
+  position:sticky;top:0;z-index:60;background:rgba(11,10,31,.86);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)
+}
+.nav{display:flex;align-items:center;gap:32px;height:74px}
+.nav img{height:38px;width:auto}
+.nav nav{margin-left:auto;display:flex;gap:28px;align-items:center}
+.nav nav a:not(.btn){
+  text-decoration:none;font-size:.83rem;font-weight:500;letter-spacing:.06em;
+  text-transform:uppercase;color:#BFBDD2;transition:color .15s
+}
+.nav nav a:not(.btn):hover{color:var(--lime)}
+.nav .btn{padding:11px 20px;font-size:.86rem}
+.nav nav a.btn-1{color:var(--ink)}
+.burger{display:none;margin-left:auto;background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer;line-height:1}
+@media(max-width:940px){
+  .nav nav{
+    display:none;position:absolute;top:74px;left:0;right:0;background:var(--navy-2);
+    flex-direction:column;align-items:flex-start;gap:0;padding:8px 24px 20px;
+    border-bottom:1px solid var(--line)
+  }
+  .nav nav.open{display:flex}
+  .nav nav a{padding:13px 0;width:100%;border-bottom:1px solid var(--line)}
+  .nav nav .btn{margin-top:14px;width:100%;justify-content:center}
+  .burger{display:block}
+}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(56px,7vw,96px) 0 clamp(64px,8vw,104px);position:relative;overflow:hidden}
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(900px 520px at 78% 18%,rgba(0,166,192,.16),transparent 68%)
+}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(36px,5vw,72px);align-items:center;position:relative}
+.hero h1 span{color:var(--lime)}
+.hero .lead{margin-top:22px;font-size:1.16rem}
+.hero-proof{
+  margin-top:40px;padding-top:22px;border-top:1px solid var(--line);
+  font-size:.9rem;color:var(--muted);letter-spacing:.02em;
+  display:flex;flex-wrap:wrap;gap:10px 26px
+}
+.hero-proof span{display:inline-flex;gap:7px;white-space:nowrap}
+.hero-proof b{color:var(--text);font-weight:500}
+.hero-img{position:relative}
+.hero-img img{
+  border-radius:3px;width:100%;height:clamp(400px,54vw,600px);
+  object-fit:cover;object-position:center 22%
+}
+.hero-tag{
+  position:absolute;bottom:0;left:0;right:0;padding:44px 24px 20px;
+  background:linear-gradient(transparent,rgba(11,10,31,.92));
+  font-size:.82rem;color:#CFCDE0;letter-spacing:.03em
+}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-img{order:-1}
+  .hero-img img{height:340px}
+}
+
+/* ---------- stat band ---------- */
+.stats{background:var(--navy-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats-in{padding:clamp(52px,6vw,80px) 0}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.stat{background:var(--navy-2);padding:32px 28px}
+.stat-n{font-size:clamp(2.3rem,3.6vw,3.1rem);color:var(--lime);letter-spacing:-.02em}
+.stat-l{margin-top:8px;font-size:.9rem;color:#B4B1CB;line-height:1.5;max-width:26ch}
+.stat-note{margin-top:26px;font-size:.8rem;color:var(--muted)}
+@media(max-width:820px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.stat-grid{grid-template-columns:1fr}}
+
+/* ---------- steps ---------- */
+.steps-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(36px,5vw,68px);align-items:start}
+.step{display:flex;gap:22px;padding:26px 0;border-top:1px solid var(--line)}
+.step:first-child{border-top:0;padding-top:0}
+.step-n{
+  font-family:var(--head);font-size:2rem;font-weight:700;color:var(--lime);
+  line-height:1;min-width:44px;opacity:.9
+}
+.step h3{margin-bottom:7px}
+.step p{margin:0;color:#B8B5CE;font-size:.98rem}
+.risk{
+  margin-top:30px;padding:24px 26px;background:var(--navy-3);
+  border-left:3px solid var(--lime);border-radius:2px
+}
+.risk p{margin:0;font-size:1rem;color:#DDDBEC}
+.risk b{color:var(--lime);font-weight:600}
+.steps-img img{border-radius:3px;height:clamp(360px,46vw,520px);object-fit:cover;width:100%}
+@media(max-width:900px){.steps-grid{grid-template-columns:1fr}}
+
+/* ---------- reasons (was accordions) ---------- */
+.reasons{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.reason{
+  background:var(--navy-2);border:1px solid var(--line);border-radius:3px;
+  padding:30px 26px 32px;display:flex;flex-direction:column
+}
+.reason .ico{
+  width:40px;height:40px;margin-bottom:20px;display:grid;place-items:center;
+  background:rgba(198,219,76,.12);border-radius:2px;color:var(--lime)
+}
+.reason .ico svg{width:21px;height:21px}
+.reason h3{margin-bottom:11px;font-size:1.18rem}
+.reason p{margin:0;font-size:.94rem;color:#AFACC8;line-height:1.6}
+.reason .kpi{
+  margin-top:auto;padding-top:18px;font-family:var(--head);font-weight:700;
+  font-size:1.55rem;color:var(--lime);letter-spacing:-.01em
+}
+.reason .kpi small{
+  display:block;font-family:var(--body);font-weight:300;font-size:.78rem;
+  color:var(--muted);letter-spacing:0;text-transform:none;margin-top:2px
+}
+@media(max-width:1040px){.reasons{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.reasons{grid-template-columns:1fr}}
+
+/* ---------- results spread ---------- */
+.spread{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,5vw,64px);align-items:start}
+.big-stat{
+  background:var(--navy-2);border:1px solid var(--line);border-left:3px solid var(--lime);
+  border-radius:3px;padding:34px 32px
+}
+.big-stat .n{
+  font-family:var(--head);font-weight:700;font-size:clamp(3.4rem,7vw,5.2rem);
+  color:var(--lime);line-height:1;letter-spacing:-.02em
+}
+.big-stat .l{margin-top:10px;font-size:1rem;color:#CFCDE0}
+.rng{margin-top:26px;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px}
+.rng div{background:var(--navy-2);padding:17px 22px;display:flex;gap:16px;align-items:baseline}
+.rng .k{font-size:.9rem;color:#AFACC8;flex:1}
+.rng .v{font-family:var(--head);font-weight:600;font-size:1.34rem;color:var(--text);white-space:nowrap}
+.tbl-note{margin-top:18px;font-size:.82rem;color:var(--muted)}
+@media(max-width:900px){.spread{grid-template-columns:1fr}}
+
+/* ---------- outings ---------- */
+.outing{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(36px,5vw,64px);align-items:center}
+.outing-img img{border-radius:3px;height:clamp(340px,44vw,480px);object-fit:cover;object-position:center 24%;width:100%}
+.olist{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;margin-top:30px}
+.olist div{background:var(--navy-2);padding:20px 24px}
+.olist h3{font-size:1.06rem;margin-bottom:5px}
+.olist p{margin:0;font-size:.92rem;color:#AFACC8}
+@media(max-width:900px){.outing{grid-template-columns:1fr}.outing-img{order:-1}}
+
+/* ---------- photo strip ---------- */
+.photos{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.photos img{
+  height:230px;object-fit:cover;object-position:center 26%;width:100%;
+  border-radius:2px;filter:saturate(1.03)
+}
+@media(max-width:1000px){.photos{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.photos{grid-template-columns:repeat(2,1fr)}.photos img{height:180px}}
+
+/* ---------- courses ---------- */
+.courses{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.course{background:var(--navy);padding:24px 22px}
+.course .nm{font-family:var(--head);font-weight:600;font-size:1.16rem;text-transform:uppercase;letter-spacing:.01em}
+.course .mt{margin-top:6px;font-size:.82rem;color:var(--muted)}
+.course.soon{background:var(--navy-2);text-decoration:none;transition:background .16s}
+.course.soon .nm{color:#8F8CAB;transition:color .16s}
+.course.soon:hover{background:var(--navy-3)}
+.course.soon:hover .nm{color:var(--lime)}
+@media(max-width:1000px){.courses{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.courses{grid-template-columns:1fr}}
+
+/* ---------- testimonials ---------- */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.quote{background:var(--navy-2);border:1px solid var(--line);border-radius:3px;padding:32px 28px}
+.quote blockquote{margin:0 0 24px;font-size:1.04rem;line-height:1.62;color:#DEDCEC}
+.quote .who{display:flex;align-items:center;gap:14px}
+.quote .who img{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center 20%}
+.mono{
+  width:52px;height:52px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto;
+  background:var(--navy-3);border:1px solid rgba(198,219,76,.32);color:var(--lime);
+  font-family:var(--head);font-weight:700;font-size:1.12rem;letter-spacing:.02em
+}
+.quote .nm{font-weight:500;font-size:.95rem;color:var(--text)}
+.quote .rl{font-size:.82rem;color:var(--muted);line-height:1.4}
+@media(max-width:940px){.quotes{grid-template-columns:1fr}}
+
+/* ---------- tracecam ---------- */
+.tc{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,4vw,56px);align-items:center}
+.tc-card{
+  border:1px solid var(--line);border-radius:3px;background:var(--navy-2);
+  aspect-ratio:16/9;display:grid;place-items:center;text-align:center;padding:28px;position:relative;overflow:hidden
+}
+.tc-card::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(500px 300px at 50% 40%,rgba(0,166,192,.14),transparent 70%)
+}
+.tc-card .inner{position:relative;z-index:1}
+.tc-dot{
+  display:inline-flex;align-items:center;gap:8px;font-size:.76rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);font-weight:500
+}
+.tc-dot i{width:8px;height:8px;border-radius:50%;background:#6B6885;display:block}
+.tc-card h3{margin:16px 0 8px;font-size:1.5rem}
+.tc-card p{margin:0;font-size:.9rem;color:var(--muted);max-width:34ch}
+.tc-card a{color:var(--cyan);font-size:.88rem;margin-top:14px;display:inline-block}
+@media(max-width:860px){.tc{grid-template-columns:1fr}}
+
+/* ---------- giving back (inverted) ---------- */
+.give{background:var(--cream);color:var(--ink);border-top:0}
+.give .eyebrow{color:#5C6B1C}
+.give h2{color:var(--ink)}
+.give .lead{color:#41405A}
+.give-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,5vw,72px);align-items:center}
+.give-num{
+  font-family:var(--head);font-weight:700;font-size:clamp(3rem,6vw,4.6rem);
+  color:var(--ink);line-height:1;letter-spacing:-.02em
+}
+.give-num small{
+  display:block;font-family:var(--body);font-weight:400;font-size:.9rem;
+  color:#5C5A78;letter-spacing:0;text-transform:none;margin-top:10px;max-width:34ch
+}
+.orgs{display:flex;gap:20px;flex-wrap:wrap;margin-top:32px}
+.org{
+  background:#fff;border:1px solid #E2DFD4;border-radius:3px;padding:24px 28px;
+  display:grid;place-items:center;flex:1 1 190px;min-height:118px
+}
+.org img{max-height:64px;width:auto;object-fit:contain}
+@media(max-width:860px){.give-grid{grid-template-columns:1fr}}
+
+/* ---------- faq ---------- */
+.faq{max-width:860px}
+details{border-bottom:1px solid var(--line)}
+details summary{
+  cursor:pointer;list-style:none;padding:22px 44px 22px 0;position:relative;
+  font-family:var(--head);font-weight:600;font-size:1.22rem;text-transform:uppercase;
+  letter-spacing:.01em;color:var(--text)
+}
+details summary::-webkit-details-marker{display:none}
+details summary::after{
+  content:'+';position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  font-size:1.5rem;color:var(--lime);font-family:var(--body);font-weight:300;line-height:1
+}
+details[open] summary::after{content:'−'}
+details summary:hover{color:var(--lime)}
+details .a{padding:0 40px 26px 0;color:#B4B1CB;font-size:.99rem;max-width:68ch}
+details .a p{margin:0 0 12px}
+details .a p:last-child{margin:0}
+/* ---------- cta ---------- */
+.cta{background:var(--navy-2);border-top:1px solid var(--line)}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,72px);align-items:start}
+form{display:grid;gap:14px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+input,textarea{
+  width:100%;padding:13px 15px;border-radius:2px;font-family:var(--body);font-size:.97rem;
+  background:#241F52;border:1px solid rgba(255,255,255,.2);color:#fff;font-weight:300
+}
+input::placeholder,textarea::placeholder{color:#8E8AAE}
+input:focus,textarea:focus{outline:none;border-color:var(--lime);background:#2A2560}
+textarea{resize:vertical;min-height:118px}
+.cta .direct{margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
+.cta .direct a{color:var(--lime);text-decoration:none;font-size:1.16rem;font-weight:500}
+.cta .direct a:hover{text-decoration:underline}
+@media(max-width:860px){.cta-grid{grid-template-columns:1fr}}
+
+/* ---------- footer ---------- */
+footer{padding:52px 0;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
+.foot{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.foot img{height:40px;width:auto;opacity:.85}
+.foot .sp{margin-left:auto}
+.foot a{color:var(--muted);text-decoration:none}
+.foot a:hover{color:var(--lime)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" aria-label="Girdie Golf home"><img src="img/logo-white.png" alt="Girdie Golf"></a>
+    <button class="burger" aria-label="Menu" aria-expanded="false">☰</button>
+    <nav id="menu">
+      <a href="#how">How it works</a>
+      <a href="#why">Why courses say yes</a>
+      <a href="#results">Results</a>
+      <a href="#outings">Outings</a>
+      <a href="#giving">Giving back</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-1" href="#contact">Book a free pilot</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">For golf course operators</p>
+        <h1>One par-3.<br>About <span>$700 a day</span> in pro shop gift card sales.</h1>
+        <p class="lead">
+          Girdie Golf runs a hit-the-green challenge on a hole you already have.
+          We bring the staff, the signage and the prize money — including the $1,000
+          hole-in-one. You sell the gift cards and keep the happier golfers.
+        </p>
+        <div class="btns">
+          <a class="btn btn-1" href="#contact">Book a free pilot</a>
+          <a class="btn btn-2" href="#results">See the 2026 numbers</a>
+        </div>
+        <p class="hero-proof">
+          <span><b>11</b> partner courses</span>
+          <span><b>160</b> event days</span>
+          <span><b>19,635</b> golfers engaged</span>
+          <span>2026 season</span>
+        </p>
+      </div>
+      <div class="hero-img">
+        <img src="img/photos/p01.jpg" alt="Three golfers beside the Girdie Golf banner on a par-3 tee overlooking water">
+        <div class="hero-tag">Hit the green. Double your money.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STAT BAND ============ -->
+  <section class="stats" id="numbers">
+    <div class="wrap stats-in">
+      <p class="eyebrow">2026 season to date</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-n">$112,360</div>
+          <div class="stat-l">In gift cards sold through partner pro shops</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">$702</div>
+          <div class="stat-l">Average gift card sales per event day, per course</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">19,635</div>
+          <div class="stat-l">Golfers engaged on the tee</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">52%</div>
+          <div class="stat-l">Of golfers we engage choose to play</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">2,808</div>
+          <div class="stat-l">Winners paid out — every one of them redeems in your shop</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">$1,000</div>
+          <div class="stat-l">Hole-in-one paid in full, funded entirely by Girdie Golf</div>
+        </div>
+      </div>
+      <p class="stat-note">
+        April 4 – July 26, 2026 across 11 partner courses and 160 event days. Figures from our own
+        shift-level operating records.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="sect" id="how">
+    <div class="wrap">
+      <div class="sect-head">
+        <p class="eyebrow">How it works</p>
+        <h2>Three steps. None of them are yours.</h2>
+      </div>
+      <div class="steps-grid">
+        <div>
+          <div class="step">
+            <div class="step-n">01</div>
+            <div>
+              <h3>We set up on your par-3</h3>
+              <p>Our staffer, our banner, our tablet, our gift card float. We check in with the
+                pro shop, run the hole, and pack out. Your team does nothing.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">02</div>
+            <div>
+              <h3>Golfers opt in for $20</h3>
+              <p>Cash or card, as each group reaches the tee. It takes under a minute and doesn't
+                slow play. About half of everyone we talk to plays.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">03</div>
+            <div>
+              <h3>Hit the green, double your money</h3>
+              <p>Green in regulation wins a $40 gift card, redeemable in your pro shop, clubhouse
+                or toward a future round. A hole-in-one wins $1,000.</p>
+            </div>
+          </div>
+          <div class="risk">
+            <p><b>We fund every prize — including the $1,000.</b> Your course carries no prize
+              liability and no staffing cost. You sell us gift cards at face value and your shop
+              gets the redemption traffic.</p>
+          </div>
+        </div>
+        <div class="steps-img">
+          <img src="img/photos/p02.jpg" alt="A golfer holding the gift card he won at the Girdie Golf challenge">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY COURSES SAY YES ============ -->
+  <section class="sect" id="why">
+    <div class="wrap">
+      <div class="sect-head">
+        <p class="eyebrow">Why courses say yes</p>
+        <h2>Four reasons, with the numbers behind them.</h2>
+      </div>
+      <div class="reasons">
+        <div class="reason">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg></div>
+          <h3>Pro shop revenue</h3>
+          <p>You sell us gift cards at face value for every winner. Those winners then have to
+            walk into your shop to spend them, and most spend more than the card is worth.</p>
+          <div class="kpi">$112,360<small>Sold across 11 courses in 2026</small></div>
+        </div>
+        <div class="reason">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13A4 4 0 0119 7"/></svg></div>
+          <h3>Player engagement</h3>
+          <p>A live prize on the course changes the round. Groups talk about it at the turn and
+            ask for it the next time they book.</p>
+          <div class="kpi">52%<small>Of golfers engaged chose to play</small></div>
+        </div>
+        <div class="reason">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 10-7.8 7.8L12 21.2l8.8-8.8a5.5 5.5 0 000-7.8z"/></svg></div>
+          <h3>Support local causes</h3>
+          <p>A quarter of our profit goes to The First Tee and Children's Hospital of
+            Philadelphia. Golfers can add a donation at the tee, and many do.</p>
+          <div class="kpi">25%<small>Of profit pledged to charity</small></div>
+        </div>
+        <div class="reason">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+          <h3>No risk, easy trial</h3>
+          <p>No contract and no minimum. Start with a single weekend, then look at the numbers
+            from your own course before you commit to anything.</p>
+          <div class="kpi">1 weekend<small>To find out if it works for you</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS ============ -->
+  <section class="sect" id="results">
+    <div class="wrap">
+      <div class="sect-head">
+        <p class="eyebrow">2026 results</p>
+        <h2>What a day with us actually looks like.</h2>
+      </div>
+      <div class="spread">
+        <div class="big-stat">
+          <div class="n">$702</div>
+          <div class="l">Average gift card sales per event day, across all 11 partner courses and
+            160 event days of the 2026 season.</div>
+        </div>
+        <div>
+          <div class="rng">
+            <div><span class="k">Best-performing courses</span><span class="v">$900–$980 / day</span></div>
+            <div><span class="k">Opt-in rate, course to course</span><span class="v">42% – 67%</span></div>
+            <div><span class="k">Season average opt-in</span><span class="v">52%</span></div>
+            <div><span class="k">Busiest partner this season</span><span class="v">32 event days</span></div>
+          </div>
+          <p class="tbl-note">The spread is mostly about the hole. Courses that give us a par-3 with
+            real traffic — near the turn, visible from the clubhouse — land at the top of that range.
+            Part of the free pilot is working out which hole that is for you. We'll show you your own
+            numbers afterward, whatever they say.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PHOTOS ============ -->
+  <section class="sect" style="padding-top:0;border-top:0">
+    <div class="wrap">
+      <p class="eyebrow" style="margin-bottom:20px">On the course, 2026</p>
+      <div class="photos">
+        <img src="img/photos/p09.jpg" alt="Three golfers holding their Girdie Golf gift cards">
+        <img src="img/photos/p14.jpg" alt="A Girdie Golf staffer with the banner on an empty fairway">
+        <img src="img/photos/p22.jpg" alt="A Girdie Golf staffer in a branded cap at the challenge hole">
+        <img src="img/photos/p18.jpg" alt="A golfer holding up the gift card he won">
+        <img src="img/photos/p13.jpg" alt="A Girdie Golf staffer handing a gift card to a winning golfer">
+        <img src="img/photos/p20.jpg" alt="Three golfers beside the Girdie Golf banner">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COURSES ============ -->
+  <section class="sect" id="courses">
+    <div class="wrap">
+      <div class="sect-head">
+        <p class="eyebrow">Where we operate</p>
+        <h2>11 partner courses across the Philadelphia region.</h2>
+      </div>
+      <div class="courses">
+        <div class="course"><div class="nm">Bella Vista</div><div class="mt">Since April 2026</div></div>
+        <div class="course"><div class="nm">Glen Mills</div><div class="mt">Since April 2026</div></div>
+        <div class="course"><div class="nm">Jeffersonville</div><div class="mt">Since April 2026</div></div>
+        <div class="course"><div class="nm">Walnut Lane</div><div class="mt">Since April 2026</div></div>
+        <div class="course"><div class="nm">John F. Byrne</div><div class="mt">Since April 2026</div></div>
+        <div class="course"><div class="nm">Mainland</div><div class="mt">Since May 2026</div></div>
+        <div class="course"><div class="nm">Landis Creek</div><div class="mt">Since May 2026</div></div>
+        <div class="course"><div class="nm">Spring Hollow</div><div class="mt">Since May 2026</div></div>
+        <div class="course"><div class="nm">Linfield National</div><div class="mt">Since June 2026</div></div>
+        <div class="course"><div class="nm">Broad Run</div><div class="mt">Since June 2026</div></div>
+        <div class="course"><div class="nm">Morgan Hill</div><div class="mt">Since July 2026</div></div>
+        <a class="course soon" href="#contact"><div class="nm">Your course</div><div class="mt">Book a free pilot weekend →</div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OUTINGS ============ -->
+  <section class="sect" id="outings">
+    <div class="wrap">
+      <div class="sect-head">
+        <p class="eyebrow">Outings &amp; tournaments</p>
+        <h2>We'll run your outing's signature hole.</h2>
+        <p class="lead">Charity scrambles, corporate days, member-guests. We bring the whole
+          challenge as a hole sponsor — banner, staff, gift cards and the $1,000 hole-in-one — so
+          your organisers get a marquee hole without organising anything.</p>
+      </div>
+      <div class="outing">
+        <div>
+          <div class="olist">
+            <div>
+              <h3>Opt-in runs higher at outings</h3>
+              <p>Scramble fields are already in a competitive mood. At our 2026 outings, roughly
+                seven in ten golfers played the challenge — well above our 52% season average.</p>
+            </div>
+            <div>
+              <h3>It can raise money for your cause</h3>
+              <p>For charity outings we'll direct a share of entries to the event's beneficiary,
+                on top of the 25% of profit we already commit. Tell us the cause and we'll work
+                out the number with you.</p>
+            </div>
+            <div>
+              <h3>Nothing for your committee to run</h3>
+              <p>We arrive early, set up on the hole you assign, run it all day and pack out.
+                Volunteers stay on their own jobs.</p>
+            </div>
+            <div>
+              <h3>You don't need to be one of our courses</h3>
+              <p>Outings travel. If your event is at a club we've never worked with, that's fine
+                — most of ours are.</p>
+            </div>
+          </div>
+          <div class="btns">
+            <a class="btn btn-1" href="mailto:info@girdie-golf.com?subject=Girdie%20Golf%20at%20our%20outing">Enquire about your outing</a>
+          </div>
+        </div>
+        <div class="outing-img">
+          <img src="img/photos/p11.jpg" alt="A foursome at an outing holding up their Girdie Golf gift card">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="sect" id="voices">
+    <div class="wrap">
+      <div class="sect-head">
+        <p class="eyebrow">What they say</p>
+        <h2>Directors of golf, and one very lucky golfer.</h2>
+      </div>
+      <div class="quotes">
+        <div class="quote">
+          <blockquote>“I was just hoping to find the green — never thought there was a chance it
+            would find the hole! Thanks to the Girdie Golf team for making this memory extra
+            special!”</blockquote>
+          <div class="who">
+            <img src="img/falcone.jpg" alt="Anthony Falcone">
+            <div>
+              <div class="nm">Anthony Falcone</div>
+              <div class="rl">$1,000 hole-in-one winner</div>
+            </div>
+          </div>
+        </div>
+        <div class="quote">
+          <blockquote>“Our players love how this game adds excitement to every round. It's a win
+            for them and a win for the course!”</blockquote>
+          <div class="who">
+            <div class="mono">MH</div>
+            <div>
+              <div class="nm">Michael Housley</div>
+              <div class="rl">Director of Golf<br>Jeffersonville Golf Club</div>
+            </div>
+          </div>
+        </div>
+        <div class="quote">
+          <blockquote>“It's been incredible watching our golfers have fun while supporting the
+            club and the great causes with Girdie Golf — it's been a highlight of the season.”</blockquote>
+          <div class="who">
+            <div class="mono">CF</div>
+            <div>
+              <div class="nm">Charlie Fick</div>
+              <div class="rl">Director of Golf<br>The Golf Course at Glen Mills</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRACECAM ============ -->
+  <section class="sect" id="tracecam">
+    <div class="wrap tc">
+      <div>
+        <p class="eyebrow">In development</p>
+        <h2>TraceCam</h2>
+        <p class="lead">We're building camera coverage for the challenge hole, so every golfer who
+          plays can walk away with the shot itself — not just the gift card. It's early, and we're
+          taking our time getting it right.</p>
+        <div class="btns">
+          <a class="btn btn-2" href="#contact">Ask us about it</a>
+        </div>
+      </div>
+      <div class="tc-card">
+        <div class="inner">
+          <span class="tc-dot"><i></i> Stream offline</span>
+          <h3>Jeffersonville tee cam</h3>
+          <p>The live feed is down while we rework the setup.</p>
+          <a href="https://www.youtube.com/watch?v=o830JpXQrX0" target="_blank" rel="noopener">
+            View the channel on YouTube →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GIVING BACK ============ -->
+  <section class="sect give" id="giving">
+    <div class="wrap give-grid">
+      <div>
+        <p class="eyebrow">The shot that gives back</p>
+        <h2>A quarter of our profit goes back to the community.</h2>
+        <p class="lead">Most of it to The First Tee and Children's Hospital of Philadelphia, and the
+          rest to local causes we run into along the way — scholarship funds, recovery charities,
+          the beneficiaries of the outings we work. Golfers can add a donation right at the tee,
+          and thousands of them have.</p>
+      </div>
+      <div>
+        <div class="give-num">
+          $8,089
+          <small>Actually paid out so far in the 2026 season — not pledged, banked or accrued.
+            Cheques written, to six different causes.</small>
+        </div>
+        <div class="orgs">
+          <div class="org"><img src="img/firsttee.webp" alt="The First Tee"></div>
+          <div class="org"><img src="img/chop.png" alt="Children's Hospital of Philadelphia"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="sect" id="faq">
+    <div class="wrap">
+      <div class="sect-head">
+        <p class="eyebrow">For directors of golf</p>
+        <h2>The questions you're actually asking.</h2>
+      </div>
+      <div class="faq">
+
+        <details open>
+          <summary>What does my course actually have to do?</summary>
+          <div class="a"><p>Operationally, nothing. We bring the staffer, the banner, the tablet
+            and the gift card float. We check in with your pro shop when we arrive, run the hole,
+            and pack out at the end of the shift. You don't assign staff, you don't handle money,
+            and you don't manage prizes.</p></div>
+        </details>
+
+        <details>
+          <summary>Who pays the $1,000 if someone makes a hole-in-one?</summary>
+          <div class="a"><p>We do. Girdie Golf funds 100% of prizes, including the $1,000
+            hole-in-one. It has happened once so far and we paid it in full, same day. Your course
+            carries no prize liability whatsoever.</p></div>
+        </details>
+
+        <details>
+          <summary>How does the course make money?</summary>
+          <div class="a"><p>You sell us gift cards at face value for every winner. In 2026 that
+            came to $112,360 across our 11 partner courses — an average of about $702 for every
+            event day we ran. Winners then redeem those cards in your pro shop, clubhouse, or
+            toward a future round, which brings them through your door and usually gets them
+            spending above the card value.</p></div>
+        </details>
+
+        <details>
+          <summary>Do you take a cut of anything?</summary>
+          <div class="a">
+            <p>No. There is no revenue split — not with your course, not with anyone. You sell us
+              gift cards at face value and that money is yours. We keep the entry fees and we pay
+              for the prizes out of them. Two clean transactions, no percentages, no invoicing back
+              and forth.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Will this slow down play?</summary>
+          <div class="a"><p>No. The challenge happens as groups arrive at a hole they were already
+            going to play. Opting in takes under a minute, and the shot is the tee shot they were
+            about to hit anyway. We've run 160 event days without a pace-of-play complaint.</p></div>
+        </details>
+
+        <details>
+          <summary>Are you insured?</summary>
+          <div class="a">
+            <p>Yes. We carry a standard general liability policy, and every course we operate at is
+              named as an additional insured on it. Ask and we'll send your certificate over before
+              we ever set foot on the property.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Which hole works best?</summary>
+          <div class="a"><p>A par-3 with a clear view of the green, ideally somewhere with natural
+            traffic like near the turn. We'll walk the course with you and recommend one — it
+            usually takes about fifteen minutes to work out.</p></div>
+        </details>
+
+        <details>
+          <summary>Can you do a one-off outing instead?</summary>
+          <div class="a"><p>Yes, and we do a lot of them — charity scrambles, corporate days,
+            member-guests. We come in as a hole sponsor and run the whole thing. Your event doesn't
+            need to be at one of our partner courses.</p></div>
+        </details>
+
+        <details>
+          <summary>How long is the trial, and what happens after?</summary>
+          <div class="a"><p>One weekend, no contract and no minimum. Afterward we'll show you the
+            numbers from your own course: golfers engaged, opt-in rate, gift cards sold. If it
+            doesn't work for you, that's the end of it and there's nothing to cancel.</p></div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="sect cta" id="contact">
+    <div class="wrap cta-grid">
+      <div>
+        <p class="eyebrow">Let's connect</p>
+        <h2>Book a free pilot weekend.</h2>
+        <p class="lead">Tell us your course and we'll come walk it with you. No contract, no
+          minimum, no cost to find out whether it works.</p>
+        <div class="direct">
+          <p style="margin:0 0 6px;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">
+            Or just email us</p>
+          <a href="mailto:info@girdie-golf.com?subject=Girdie%20Golf%20pilot%20enquiry">info@girdie-golf.com</a>
+        </div>
+      </div>
+      <form id="pilot">
+        <div class="row2">
+          <div>
+            <label for="fn">First name</label>
+            <input id="fn" name="fn" required placeholder="Jane">
+          </div>
+          <div>
+            <label for="ln">Last name</label>
+            <input id="ln" name="ln" required placeholder="Doe">
+          </div>
+        </div>
+        <div>
+          <label for="course">Course</label>
+          <input id="course" name="course" placeholder="Your golf course">
+        </div>
+        <div>
+          <label for="em">Email</label>
+          <input id="em" name="em" type="email" required placeholder="you@course.com">
+        </div>
+        <div>
+          <label for="msg">Message</label>
+          <textarea id="msg" name="msg" placeholder="Tell us a little about your course."></textarea>
+        </div>
+        <button class="btn btn-1" type="submit">Send enquiry</button>
+        <p style="margin:0;font-size:.78rem;color:var(--muted)">
+          Opens in your email app so nothing gets lost in a form inbox.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <img src="img/logo-white.png" alt="Girdie Golf">
+    <span>The shot that gives back.</span>
+    <span class="sp"><a href="mailto:info@girdie-golf.com">info@girdie-golf.com</a></span>
+    <span>© 2026 Girdie Golf Company</span>
+  </div>
+</footer>
+
+<script>
+// mobile menu
+const burger = document.querySelector('.burger');
+const menu = document.getElementById('menu');
+burger.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open);
+  burger.textContent = open ? '✕' : '☰';
+});
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  menu.classList.remove('open');
+  burger.setAttribute('aria-expanded', 'false');
+  burger.textContent = '☰';
+}));
+
+// form -> mailto (no backend needed on a static host)
+document.getElementById('pilot').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target;
+  const v = id => (f.querySelector('#' + id).value || '').trim();
+  const body = [
+    'Name: ' + v('fn') + ' ' + v('ln'),
+    'Course: ' + (v('course') || '—'),
+    'Email: ' + v('em'),
+    '',
+    v('msg')
+  ].join('\n');
+  window.location.href = 'mailto:info@girdie-golf.com'
+    + '?subject=' + encodeURIComponent('Pilot enquiry — ' + (v('course') || v('fn')))
+    + '&body=' + encodeURIComponent(body);
+});
+</script>
+</body>
+</html>
