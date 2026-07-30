@@ -315,6 +315,26 @@ input,textarea{
 input::placeholder,textarea::placeholder{color:#8E8AAE}
 input:focus,textarea:focus{outline:none;border-color:var(--lime);background:#2A2560}
 textarea{resize:vertical;min-height:118px}
+.sendpanel{
+  display:none;background:var(--navy-3);border:1px solid var(--line);
+  border-left:3px solid var(--lime);border-radius:3px;padding:28px 26px
+}
+.sendpanel h3{margin-bottom:10px}
+.sendpanel > p{font-size:.94rem;color:#B4B1CB;margin:0 0 20px}
+.sendopts{display:grid;gap:11px}
+.sendopts .btn{justify-content:center;width:100%}
+.msgbox{
+  margin-top:20px;background:#181541;border:1px solid var(--line);border-radius:2px;
+  padding:15px;font-size:.82rem;color:#CFCDE0;white-space:pre-wrap;
+  font-family:ui-monospace,Consolas,monospace;max-height:190px;overflow:auto
+}
+.copied{color:var(--lime);font-size:.86rem;margin-top:12px;display:none}
+.sendback{
+  display:inline-block;margin-top:16px;font-size:.85rem;color:var(--muted);
+  cursor:pointer;text-decoration:underline;background:none;border:0;
+  font-family:var(--body);padding:0
+}
+.sendback:hover{color:var(--lime)}
 .cta .direct{margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
 .cta .direct a{color:var(--lime);text-decoration:none;font-size:1.16rem;font-weight:500}
 .cta .direct a:hover{text-decoration:underline}
@@ -834,9 +854,21 @@ footer{padding:52px 0;border-top:1px solid var(--line);font-size:.85rem;color:va
           <textarea id="msg" name="msg" placeholder="Tell us a little about your course."></textarea>
         </div>
         <button class="btn btn-1" type="submit">Send enquiry</button>
-        <p style="margin:0;font-size:.78rem;color:var(--muted)">
-          Opens in your email app so nothing gets lost in a form inbox.</p>
       </form>
+
+      <div class="sendpanel" id="sendpanel">
+        <h3>Almost sent</h3>
+        <p>Pick whichever suits you — all three send the same message to
+          <strong>info@girdie-golf.com</strong>.</p>
+        <div class="sendopts">
+          <a class="btn btn-1" id="sendGmail" target="_blank" rel="noopener">Send with Gmail</a>
+          <a class="btn btn-2" id="sendMail">Use my email app</a>
+          <button class="btn btn-2" id="sendCopy" type="button">Copy the message instead</button>
+        </div>
+        <p class="copied" id="copied">Copied. Paste it into an email to info@girdie-golf.com</p>
+        <div class="msgbox" id="msgbox"></div>
+        <button class="sendback" id="sendback" type="button">← Back to the form</button>
+      </div>
     </div>
   </section>
 
@@ -866,11 +898,20 @@ menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   burger.textContent = '☰';
 }));
 
-// form -> mailto (no backend needed on a static host)
-document.getElementById('pilot').addEventListener('submit', e => {
+// Form -> explicit send options.
+// Deliberately does NOT auto-navigate to mailto:. A bare `location.href = 'mailto:'`
+// silently does nothing on any machine with no mail client registered for the
+// protocol — which is most people who read mail in a browser tab.
+const TO = 'info@girdie-golf.com';
+const form = document.getElementById('pilot');
+const panel = document.getElementById('sendpanel');
+const copied = document.getElementById('copied');
+
+form.addEventListener('submit', e => {
   e.preventDefault();
-  const f = e.target;
-  const v = id => (f.querySelector('#' + id).value || '').trim();
+  const v = id => (form.querySelector('#' + id).value || '').trim();
+  const who = v('course') || (v('fn') + ' ' + v('ln')).trim();
+  const subject = 'Pilot enquiry — ' + who;
   const body = [
     'Name: ' + v('fn') + ' ' + v('ln'),
     'Course: ' + (v('course') || '—'),
@@ -878,9 +919,44 @@ document.getElementById('pilot').addEventListener('submit', e => {
     '',
     v('msg')
   ].join('\n');
-  window.location.href = 'mailto:info@girdie-golf.com'
-    + '?subject=' + encodeURIComponent('Pilot enquiry — ' + (v('course') || v('fn')))
-    + '&body=' + encodeURIComponent(body);
+
+  document.getElementById('sendGmail').href =
+    'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(TO) +
+    '&su=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  document.getElementById('sendMail').href =
+    'mailto:' + TO + '?subject=' + encodeURIComponent(subject) +
+    '&body=' + encodeURIComponent(body);
+  document.getElementById('msgbox').textContent =
+    'To: ' + TO + '\nSubject: ' + subject + '\n\n' + body;
+
+  form.style.display = 'none';
+  copied.style.display = 'none';
+  panel.style.display = 'block';
+  panel.scrollIntoView({ block: 'center', behavior: 'smooth' });
+});
+
+document.getElementById('sendCopy').addEventListener('click', async () => {
+  const text = document.getElementById('msgbox').textContent;
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (err) {
+    const t = document.createElement('textarea');
+    t.value = text;
+    t.style.position = 'fixed';
+    t.style.opacity = '0';
+    document.body.appendChild(t);
+    t.select();
+    document.execCommand('copy');
+    t.remove();
+  }
+  copied.style.display = 'block';
+});
+
+document.getElementById('sendback').addEventListener('click', () => {
+  panel.style.display = 'none';
+  copied.style.display = 'none';
+  form.style.display = 'grid';
+  form.scrollIntoView({ block: 'center', behavior: 'smooth' });
 });
 </script>
 </body>
