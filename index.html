@@ -257,6 +257,10 @@ header{
   text-transform:uppercase;color:var(--muted);font-weight:500
 }
 .tc-dot i{width:8px;height:8px;border-radius:50%;background:#6B6885;display:block}
+.tc-dot.live{color:var(--lime)}
+.tc-dot.live i{background:var(--lime);box-shadow:0 0 0 0 rgba(198,219,76,.6);animation:tcpulse 2.2s ease-out infinite}
+@keyframes tcpulse{70%{box-shadow:0 0 0 9px rgba(198,219,76,0)}100%{box-shadow:0 0 0 0 rgba(198,219,76,0)}}
+@media(prefers-reduced-motion:reduce){.tc-dot.live i{animation:none}}
 .tc-card h3{margin:16px 0 8px;font-size:1.5rem}
 .tc-card p{margin:0;font-size:.9rem;color:var(--muted);max-width:34ch}
 .tc-card a{color:var(--cyan);font-size:.88rem;margin-top:14px;display:inline-block}
@@ -701,11 +705,11 @@ footer{padding:52px 0;border-top:1px solid var(--line);font-size:.85rem;color:va
       </div>
       <div class="tc-card">
         <div class="inner">
-          <span class="tc-dot"><i></i> Stream offline</span>
+          <span class="tc-dot live"><i></i> Stream live</span>
           <h3>Jeffersonville tee cam</h3>
-          <p>The live feed is down while we rework the setup.</p>
-          <a href="https://www.youtube.com/watch?v=o830JpXQrX0" target="_blank" rel="noopener">
-            View the channel on YouTube →</a>
+          <p>Pointed down the challenge hole, running through daylight hours.</p>
+          <a href="https://www.youtube.com/@GirdieGolfCo/live" target="_blank" rel="noopener">
+            Watch the live feed →</a>
         </div>
       </div>
     </div>
