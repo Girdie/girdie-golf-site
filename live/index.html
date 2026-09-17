@@ -24,13 +24,25 @@
 
 <script>
   // ---- THE ONLY LINE THAT NORMALLY NEEDS EDITING -------------------------------------
-  // Direct watch URL. Chosen over the channel's /live alias because /live was measured
-  // broken on 2026-09-17 (see comment above). The cost of this choice: the id changes if
-  // the broadcast is ever recreated - e.g. if YouTube's auto-stop ends it - and then this
-  // line is stale and must be updated. Prefer switching back to the /live form below the
-  // moment it is observed working, because that one is id-independent and never goes stale.
-  var STREAM_URL = "https://www.youtube.com/watch?v=6i1XYDDZVwY";
-  // var STREAM_URL = "https://www.youtube.com/@GirdieGolfCo/live";   // preferred once it works
+  // The CHANNEL page, deliberately - not a watch?v= id, and not the /live alias.
+  //
+  // This choice is the whole point of the page, so it is worth being explicit about the
+  // two rejected options:
+  //
+  //   /live      - id-independent and would be ideal, but it is BROKEN for this channel.
+  //                Measured 2026-09-17: the stream was live for 70+ minutes (channel page
+  //                reported isLiveNow:true throughout) and /live never once redirected.
+  //                That is far past propagation lag.
+  //   watch?v=   - works, and is one tap faster, but the id dies with its broadcast.
+  //                YouTube's auto-stop ends a broadcast on any encoder blip, and the
+  //                replacement gets a new id - so a fixed id is a dead QR code waiting
+  //                for a bad night. The camera feed already drops several times a day.
+  //
+  // The channel page always resolves and surfaces the live stream at the top with a LIVE
+  // badge. It costs the golfer one tap. In exchange, this URL cannot go stale - which is
+  // the property that actually matters when the QR pointing at it is printed on Dibond
+  // and bolted to a pole for 5-7 years.
+  var STREAM_URL = "https://www.youtube.com/@GirdieGolfCo";
   // ------------------------------------------------------------------------------------
 
   // replace() rather than assign(): a golfer who taps Back should return to whatever they
@@ -91,16 +103,17 @@
   <main class="card">
     <span class="badge"><span class="dot"></span>Now streaming</span>
     <h1>Taking you to the live stream</h1>
-    <p>Hole #4 at Jeffersonville, live on YouTube.</p>
-    <!-- href is set by the script; this literal is the no-JS fallback target. -->
-    <a class="btn" id="go" href="https://www.youtube.com/watch?v=6i1XYDDZVwY">Watch now</a>
-    <span class="alt">Not loading? <a href="https://www.youtube.com/@GirdieGolfCo">Open the Girdie Golf channel</a></span>
+    <p>Hole #4 at Jeffersonville, live on YouTube. Look for the <strong>LIVE</strong> badge at the top of the channel.</p>
+    <!-- href is set by the script; this literal is the no-JS fallback and must be kept
+         identical to STREAM_URL above. -->
+    <a class="btn" id="go" href="https://www.youtube.com/@GirdieGolfCo">Watch now</a>
+    <span class="alt">Not loading? <a href="https://girdie-golf.com">girdie-golf.com</a></span>
   </main>
   <noscript>
     <!-- Without JS the script's meta refresh never runs, so ship one in the markup too.
          3s, not 0s: an instant refresh with no visible content is disorienting and some
          screen readers announce nothing at all before the jump. -->
-    <meta http-equiv="refresh" content="3;url=https://www.youtube.com/watch?v=6i1XYDDZVwY">
+    <meta http-equiv="refresh" content="3;url=https://www.youtube.com/@GirdieGolfCo">
   </noscript>
 </body>
 </html>
